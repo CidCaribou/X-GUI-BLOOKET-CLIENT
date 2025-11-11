@@ -22,6 +22,8 @@ Blooket Bot
 Freeze Leaderboard
 Remove All Taken Blooks
 Bypass Join Limit
+
+
  🧟 Monster Brawl
 Double Enemy XP
 Half Enemy Speed
@@ -35,6 +37,8 @@ Remove Obstacles
 Reset Health
 Set XP
 Set Level
+
+
  ☕ Cafe
 Max Items
 Remove Customers
@@ -43,6 +47,8 @@ Set Cash
 Stock Food
 Attack Player
 Spam Attack Player
+
+
  🪙 Crypto Hack
 Always Triple
 Always Hack
@@ -57,12 +63,16 @@ Crash Host (Crypto)
 Get Player's Password
 Flood Alert Box
 Set Host Screen Green
+
+
  🦖 Deceptive Dinos
 Auto Choose
 Rock ESP
 Set Fossils
 Set Multiplier
 Stop Cheating
+
+
  🗼 Tower of Doom
 Fill Deck
 Max Cards
@@ -70,6 +80,8 @@ Max Health
 Max Stats
 Min Enemy
 Set Coins
+
+
  🏭 Factory
 Choose Blook
 Free Upgrades
@@ -78,6 +90,8 @@ Remove Glitches
 Send Glitch
 Set All Mega Bot
 Set Cash
+
+
  🎣 Fishing Frenzy
 Frenzy
 Client Side Frenzy
@@ -85,6 +99,8 @@ Remove Distraction
 Send Distraction
 Set Lure
 Set Weight
+
+
  🐦 Flappy Blook
 Set Score
 Toggle Ghost
