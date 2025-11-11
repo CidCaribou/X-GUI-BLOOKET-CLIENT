@@ -128,3 +128,12 @@ PLEASE USE RESPONIBLY!!!
 
 * Set Score
 * Toggle Ghost
+
+### ✨ EXTRAS
+
+* Invert Colors
+* Set Dark Mode
+* Tab Cloaker
+* Autoclicker
+* Small Font
+* 3D Page
