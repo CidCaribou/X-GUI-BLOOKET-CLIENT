@@ -56,6 +56,22 @@ PLEASE USE RESPONIBLY!!!
 * Free Player Slots
 * Freeze Leaderboard
 
+### GOLD QUEST 
+- **Always Triple**
+- **Always Quintuple**
+- **Auto Choose**
+- **Chest ESP**
+- **Remove Bad Choices**
+- **Flood Alert Box**
+- **Reset Players Gold**
+- **Set Gold**
+- **Set Player's Gold**
+- **Reset All Players' Gold**
+- **Send Ad Text**
+- **Crash Host (Gold)**
+- **Swap Gold**
+
+
 ### 🧟 Monster Brawl
 
 * Double Enemy XP
@@ -84,6 +100,7 @@ PLEASE USE RESPONIBLY!!!
 ### 🪙 Crypto Hack
 
 * Always Triple
+* Always Quintuple
 * Always Hack
 * Auto Guess
 * Choice ESP
@@ -93,7 +110,9 @@ PLEASE USE RESPONIBLY!!!
 * Set Password
 * Crash Password
 * Steal Players Crypto
-* Get Player's Password
+* Password Spy Panel
+* Crash Password
+* Freeze Password
 * Set Host Screen Green
 * Crash Host (Crypto)
 * Flood Alert Box
@@ -138,6 +157,7 @@ PLEASE USE RESPONIBLY!!!
 
 * Set Score
 * Toggle Ghost
+* Change Game Code
 
 ### ✨ EXTRAS
 
