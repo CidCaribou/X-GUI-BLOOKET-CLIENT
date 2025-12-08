@@ -13,6 +13,7 @@
 <details>
 <summary>📜 Option 1: Userscript</summary>
 
+
 1. Install a **Userscript Manager** (Tampermonkey, Violentmonkey, etc.)  
 2. Copy the code from `X-GUI.USER.JS` and import it into your manager  
 3. Or install via GreasyFork [**here**](https://greasyfork.org/en/scripts/553301-x-gui-client-for-blooket)  
@@ -22,6 +23,7 @@
 <details>
 <summary>💻 Option 2: Browser Console</summary>
 
+
 1. Right-click the page → Select **Inspect**  
 2. Navigate to the **Console** tab  
 3. Paste the code from `X-GUI.JS`  
@@ -30,6 +32,7 @@
 
 <details>
 <summary>🔖 Option 3: Bookmarklet</summary>
+
 
 1. Right-click your bookmarks bar → **Add Page**  
 2. Paste the code from `X-GUI.MIN.JS` into the URL field  
