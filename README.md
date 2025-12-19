@@ -1,5 +1,5 @@
 # 🚀 X-GUI Blooket Client
-# THANKS FOR TRYING X-GUI!
+# DOWNLOAD CSP UNBLOCK [**HERE**](https://chromewebstore.google.com/detail/csp-unblock/lkbelpgpclajeekijigjffllhigbhobd?hl=en) FOR A BETTER EXPERIENCE
 # Note From The Author:
 Thanks so much for the support guys!
 I never thought this project would get this much attention and grow so much!
