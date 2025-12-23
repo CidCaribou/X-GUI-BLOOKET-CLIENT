@@ -1,4 +1,5 @@
 
+
     /**
  * @license AGPL-3.0
  * Blooket Cheats
@@ -22,6 +23,11 @@
 */
 
 /* THE UPDATE CHECKER IS ADDED DURING COMMIT PREP, THERE MAY BE REDUNDANT CODE, DO NOT TOUCH */
+
+console.log("%c X-GUI CLIENT LOADED! ENJOY! %c\n Created by Xullys on GitHub", "color: #0bc2cf; font-size: 3rem", "color: #8000ff; font-size: 1rem");
+console.log("%c gui.js", "color: #0bc2cf; font-size: 1rem");
+console.log("%c Star the GitHub repo! %c https://github.com/xgui-client/X-GUI-BLOOKET-CLIENT", "color: #ffd000; font-size: 1rem", "color: #8000ff; font-size: 1rem");
+
 (() => {
     let iframe = document.querySelector("iframe");
     if (!iframe) {
@@ -40,21 +46,21 @@
     const timeProcessed = 1747005941679;
     let latestProcess = -1;
     const cheat = (async () => {
-        const versionName = "6.50x";
+        const versionName = "6.60x";
         const gui = document.createElement("div");
         Object.assign(gui.style, {
             top: window.innerHeight / 2 - 250 + "px",
             left: innerWidth / 2 - 400 + "px",
         });
         const variables = {
-    "--highlight": "#8A2BE2",     // Bright purple highlight (like Blooket’s Tower glow)
-    "--highlight2": "#4B0082",    // Deep indigo secondary
-    "--background": "#0B0B1E",    // Dark bluish background
-    "--background2": "#151534",   // Slightly lighter dark layer
-    "--textColor": "#E0E0FF",     // Soft light text
-    "--textColor2": "#9A8CFF",    // Muted purple text
-    "--toggleOff": "#2C273F",   // Deep shadowy indigo — off
-    "--toggleOn": "#5FA3FF",    // Muted soft blue — on, pops subtly
+    "--highlight": "#8A2BE2",
+    "--highlight2": "#4B0082",
+    "--background": "#0B0B1E",
+    "--background2": "#151534",
+    "--textColor": "#E0E0FF",
+    "--textColor2": "#9A8CFF",
+    "--toggleOff": "#2C273F",
+    "--toggleOn": "#5FA3FF",
         };
 
         let settings,
@@ -1432,6 +1438,59 @@ window.addEventListener("beforeunload", saveGUIState);
                         },
                     },
                     {
+                        name: "Pin Guesser",
+description: "Brute forces combinations for existing pins ONLY WORKS IF CSP IS DISABLED, YOU NEED TO SPAM A LOT TO FIND WORKING PIN!!!",
+run: function() {
+    if (!window.location.href.includes("play.blooket.com")) alert("This cheat only works on play.blooket.com, opening a new tab."), window.open("https://play.blooket.com/");
+    {
+        var e = 0,
+            t = 0,
+            a = document.querySelector("div[class*='titleText']");
+
+        function o() {
+            return Object.values(function e(t = document.querySelector("body>div")) {
+                return Object.values(t)[1]?.children?.[0]?._owner.stateNode ? t : e(t.querySelector(":scope>div"))
+            }())[1].children[0]._owner.stateNode
+        }
+
+        !function r() {
+            let i = Math.floor(9e6 * Math.random()) + 1e6;
+            fetch(`https://fb.blooket.com/c/firebase/id?id=${i}`, {
+                method: "GET",
+                credentials: "include"
+            }).then(e => e.json()).then(n => {
+                if (n.success === true) {
+                    console.log("Game found:", i);
+                    a.innerHTML = "Game Found!";
+                    o().setState({
+                        client: {
+                            hostId: i.toString()
+                        }
+                    });
+                } else {
+                    console.log("No game found for:", i);
+                    o().setState({
+                        client: {
+                            hostId: i.toString()
+                        }
+                    });
+                    e++;
+                    a.innerHTML = "Guesses: " + e;
+                    if (++t > 15) {
+                        setTimeout(r, 1e3);
+                        t = 0;
+                    } else {
+                        r();
+                    }
+                }
+            }).catch(e => {
+                console.error("Error fetching game ID:", e);
+            });
+        }()
+    }
+}
+
+                    },{
                         name: "Free Player Slots",
             description: "Allows more players to join if the game is full",
             run: async () => {
@@ -1814,7 +1873,73 @@ extras: {
   name: "Extras",
   cheats: [
     {
-      name: "Toggle Invert Colors",
+       name: "Remove CSP and Bypass CORS",
+            description: "Removes Content Security Policy and bypasses Cross-Origin Resource Sharing restrictions on the page.",
+            type: "toggle",
+            run: function() {
+                // --- REMOVE CSP ---
+                function REMOVE_CSP() {
+                    // Remove all CSP-related meta tags
+                    const metaTags = document.getElementsByTagName("meta");
+                    for (let i = metaTags.length - 1; i >= 0; i--) {
+                        if (metaTags[i].getAttribute("http-equiv") === "Content-Security-Policy" ||
+                            metaTags[i].getAttribute("http-equiv") === "X-Content-Security-Policy" ||
+                            metaTags[i].getAttribute("http-equiv") === "X-WebKit-CSP") {
+                            metaTags[i].parentNode.removeChild(metaTags[i]);
+                        }
+                    }
+
+                    // Disable CSP headers via XMLHttpRequest
+                    if (window.XMLHttpRequest) {
+                        const originalOpen = XMLHttpRequest.prototype.open;
+                        XMLHttpRequest.prototype.open = function(method, url) {
+                            this.setRequestHeader("Content-Security-Policy", ""); // Remove any CSP headers
+                            this.setRequestHeader("X-Content-Security-Policy", ""); // Remove X-Content-Security headers
+                            return originalOpen.apply(this, arguments);
+                        };
+                    }
+                }
+
+                // --- BYPASS CORS ---
+                function BYPASS_CORS() {
+                    // Modify XMLHttpRequest to allow cross-origin requests
+                    if (window.XMLHttpRequest) {
+                        const originalOpen = XMLHttpRequest.prototype.open;
+                        XMLHttpRequest.prototype.open = function(method, url) {
+                            this.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+                            this.setRequestHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow common methods
+                            this.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"); // Allow necessary headers
+                            return originalOpen.apply(this, arguments);
+                        };
+
+                        // Modify Fetch API to include CORS headers
+                        const originalFetch = window.fetch;
+                        window.fetch = function(url, options = {}) {
+                            options.headers = options.headers || {};
+                            options.headers["Access-Control-Allow-Origin"] = "*"; // Allow all origins
+                            options.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"; // Allow common methods
+                            options.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"; // Allow necessary headers
+                            return originalFetch(url, options);
+                        };
+                    }
+                }
+
+                // --- Disable Web Security (LocalStorage/SessionStorage) ---
+                function DISABLE_WEB_SECURITY() {
+                    // Override localStorage and sessionStorage security restrictions
+                    Object.defineProperty(window, "localStorage", { get: function() { return window.localStorage; }, configurable: true });
+                    Object.defineProperty(window, "sessionStorage", { get: function() { return window.sessionStorage; }, configurable: true });
+                }
+
+                // Run the functions
+                REMOVE_CSP();
+                BYPASS_CORS();
+                DISABLE_WEB_SECURITY();
+            }
+        },{
+
+
+        name: "Toggle Invert Colors",
       description: "Toggle between inverting and restoring colors on the page",
       run: function () {
         const html = document.documentElement;
@@ -2050,6 +2175,650 @@ extras: {
                     document.title = t || "Blooket"
                  }
         }, {
+
+
+
+/* ========== COLOR & FILTER MODES ========== */
+
+
+  name: "Grayscale Mode",
+  description: "Turns the page grayscale",
+  run: function () {
+    const html = document.documentElement;
+    html.style.filter =
+      html.style.filter === "grayscale(1)" ? "" : "grayscale(1)";
+  }
+},
+
+{
+  name: "Sepia Mode",
+  description: "Applies a sepia filter",
+  run: function () {
+    const html = document.documentElement;
+    html.style.filter =
+      html.style.filter === "sepia(1)" ? "" : "sepia(1)";
+  }
+},
+
+{
+  name: "High Contrast",
+  description: "Boosts contrast for readability",
+  run: function () {
+    const html = document.documentElement;
+    html.style.filter =
+      html.style.filter === "contrast(1.5)" ? "" : "contrast(1.5)";
+  }
+},
+
+{
+  name: "Soft Blur",
+  description: "Applies subtle blur",
+  run: function () {
+    const html = document.documentElement;
+    html.style.filter =
+      html.style.filter.includes("blur") ? "" : "blur(3px)";
+  }
+},
+
+{
+  name: "Pastel Theme",
+  description: "Soft pastel color palette",
+  run: function () {
+    if (document.getElementById("pastel-ui")) {
+      document.getElementById("pastel-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "pastel-ui";
+    style.innerHTML = `* { filter: saturate(0.8) brightness(1.05); }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Rainbow Hue Cycle",
+  description: "Smooth color cycling",
+  run: function () {
+    if (window._rainbow) {
+      clearInterval(window._rainbow);
+      window._rainbow = null;
+      document.documentElement.style.filter = "";
+      return;
+    }
+    let i = 0;
+    window._rainbow = setInterval(() => {
+      document.documentElement.style.filter = `hue-rotate(${i++}deg)`;
+      if (i > 360) i = 0;
+    }, 40);
+  }
+},
+
+/* ========== UI MODS ========== */
+
+{
+  name: "Rounded UI",
+  description: "Extra rounded corners",
+  run: function () {
+    if (document.getElementById("rounded-ui")) {
+      document.getElementById("rounded-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "rounded-ui";
+    style.innerHTML = `* { border-radius: 16px !important; }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Outline UI",
+  description: "Outlines UI elements",
+  run: function () {
+    if (document.getElementById("outline-ui")) {
+      document.getElementById("outline-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "outline-ui";
+    style.innerHTML = `* { outline: 1px solid rgba(255,255,255,0.12); }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Flat UI",
+  description: "Removes shadows for a flat look",
+  run: function () {
+    if (document.getElementById("flat-ui")) {
+      document.getElementById("flat-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "flat-ui";
+    style.innerHTML = `* { box-shadow: none !important; text-shadow: none !important; }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Wobbly UI",
+  description: "UI gently wobbles",
+  run: function () {
+    if (document.getElementById("wobbly-ui")) {
+      document.getElementById("wobbly-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "wobbly-ui";
+    style.innerHTML = `
+      * { animation: wobble 2s infinite alternate; }
+      @keyframes wobble { 0% { transform: rotate(-1deg); } 100% { transform: rotate(1deg); } }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Floating UI",
+  description: "UI gently floats up and down",
+  run: function () {
+    if (document.getElementById("float-ui")) {
+      document.getElementById("float-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "float-ui";
+    style.innerHTML = `
+      * { animation: floaty 3s ease-in-out infinite; }
+      @keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-5px);} }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Tiny UI",
+  description: "Slightly shrinks UI",
+  run: function () {
+    const html = document.documentElement;
+    html.style.zoom = html.style.zoom === "0.9" ? "" : "0.9";
+  }
+},
+
+/* ========== FUN VISUALS ========== */
+
+{
+  name: "Mirror Page",
+  description: "Flips page horizontally",
+  run: function () {
+    const html = document.documentElement;
+    html.style.transform = html.style.transform === "scaleX(-1)" ? "" : "scaleX(-1)";
+  }
+},
+
+{
+
+
+
+  name: "Outline Elements (Black)",
+  description: "Toggles black outlines on all page elements",
+  run: function () {
+    if (document.getElementById("outline-elements-black")) {
+      document.getElementById("outline-elements-black").remove();
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = "outline-elements-black";
+    style.innerHTML = `
+      * {
+        outline: 1px solid black !important;
+        outline-offset: -1px !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+},{
+
+
+  name: "Outline Elements (Red)",
+  description: "Toggles red outlines on all page elements",
+  run: function () {
+    if (document.getElementById("outline-elements-red")) {
+      document.getElementById("outline-elements-red").remove();
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = "outline-elements-red";
+    style.innerHTML = `
+      * {
+        outline: 1px solid red !important;
+        outline-offset: -1px !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+},{
+
+
+
+  name: "Light Screen Shake",
+  description: "Subtle screen shake",
+  run: function () {
+    document.body.animate(
+      [ { transform: "translate(0,0)" }, { transform: "translate(-2px,1px)" }, { transform: "translate(2px,-1px)" }, { transform: "translate(0,0)" } ],
+      { duration: 200 }
+    );
+  }
+},
+
+{
+  name: "Jello UI",
+  description: "UI elements wobble like jello",
+  run: function () {
+    if (document.getElementById("jello-ui")) {
+      document.getElementById("jello-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "jello-ui";
+    style.innerHTML = `
+      * { animation: jello 1s infinite; }
+      @keyframes jello {
+        0%,100%{transform:scale3d(1,1,1);}
+        25%{transform:scale3d(1.05,0.95,1);}
+        50%{transform:scale3d(0.95,1.05,1);}
+        75%{transform:scale3d(1.02,0.98,1);}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+
+{
+  name: "Rotate Page",
+  description: "Rotates the entire page slowly",
+  run: function () {
+    const html = document.documentElement;
+    html.style.transition = "transform 0.5s";
+    html.style.transform = html.style.transform === "rotate(180deg)" ? "" : "rotate(180deg)";
+  }
+},
+
+{
+  name: "Scale Up Page",
+  description: "Slightly zooms in page",
+  run: function () {
+    const html = document.documentElement;
+    html.style.transform = html.style.transform === "scale(1.1)" ? "" : "scale(1.1)";
+  }
+},
+
+{
+  name: "Spin Slowly",
+  description: "Page spins continuously",
+  run: function () {
+    if (window._spin) {
+      clearInterval(window._spin);
+      window._spin = null;
+      document.documentElement.style.transform = "";
+      return;
+    }
+    let deg = 0;
+    window._spin = setInterval(() => {
+      deg += 1;
+      document.documentElement.style.transform = `rotate(${deg}deg)`;
+    }, 50);
+  }
+},
+
+{
+  name: "Flip Vertically",
+  description: "Flips page upside down",
+  run: function () {
+    const html = document.documentElement;
+    html.style.transform = html.style.transform === "scaleY(-1)" ? "" : "scaleY(-1)";
+  }
+},
+
+
+{
+  name: "Shake UI",
+  description: "UI elements shake slightly",
+  run: function () {
+    if (document.getElementById("shake-ui")) {
+      document.getElementById("shake-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "shake-ui";
+    style.innerHTML = `
+      * { animation: shake 0.2s infinite alternate; }
+      @keyframes shake { 0%{transform:translate(0,0);} 50%{transform:translate(2px,-2px);} 100%{transform:translate(0,0);} }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Flip Horizontally Random",
+  description: "UI flips left and right repeatedly",
+  run: function () {
+    if (window._flipH) {
+      clearInterval(window._flipH);
+      window._flipH = null;
+      document.documentElement.style.transform = "";
+      return;
+    }
+    let flip = 1;
+    window._flipH = setInterval(() => {
+      document.documentElement.style.transform = `scaleX(${flip})`;
+      flip *= -1;
+    }, 500);
+  }
+},
+
+{
+  name: "Glow UI Pulse",
+  description: "UI elements glow and pulse gently",
+  run: function () {
+    if (document.getElementById("pulse-ui")) {
+      document.getElementById("pulse-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "pulse-ui";
+    style.innerHTML = `
+      * { animation: pulse 2s infinite; }
+      @keyframes pulse { 0%,100%{box-shadow:none;} 50%{box-shadow:0 0 10px rgba(0,255,255,0.5);} }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "UI Zoom Pulse",
+  description: "UI elements pulse bigger and smaller",
+  run: function () {
+    if (document.getElementById("zoom-pulse-ui")) {
+      document.getElementById("zoom-pulse-ui").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "zoom-pulse-ui";
+    style.innerHTML = `
+      * { animation: zoomPulse 2s infinite; }
+      @keyframes zoomPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+
+  name: "Flip Random UI",
+  description: "UI elements flip randomly THIS WILL BREAK GUI, YOU WILL NEED TO RELOAD!",
+  run: function () {
+    if (window._flipUI) {
+      clearInterval(window._flipUI);
+      window._flipUI = null;
+      document.querySelectorAll("*").forEach(el=>el.style.transform="");
+      return;
+    }
+    window._flipUI = setInterval(() => {
+      document.querySelectorAll("*").forEach(el=>{
+        if(Math.random()<0.05) el.style.transform = `rotate(${Math.random()*360}deg)`;
+      });
+    }, 200);
+  }
+},
+
+
+
+{
+  name: "Tilted Page",
+  description: "Page tilts left and right slowly",
+  run: function () {
+    if (window._tiltPage) {
+      clearInterval(window._tiltPage);
+      window._tiltPage = null;
+      document.documentElement.style.transform="";
+      return;
+    }
+    let deg = -3;
+    let dir = 1;
+    window._tiltPage = setInterval(()=>{
+      document.documentElement.style.transform = `rotate(${deg}deg)`;
+      deg += dir;
+      if(deg>3||deg<-3) dir*=-1;
+    },50);
+  }
+},
+
+
+
+
+
+
+
+{
+  name: "Page Flip Slowly",
+  description: "Page rotates slowly 360 degrees",
+  run: function () {
+    if (window._pageFlip) {
+      clearInterval(window._pageFlip);
+      window._pageFlip = null;
+      document.documentElement.style.transform="";
+      return;
+    }
+    let deg = 0;
+    window._pageFlip = setInterval(()=>{
+      deg+=1;
+      document.documentElement.style.transform=`rotate(${deg}deg)`;
+      if(deg>=360) deg=0;
+    },50);
+  }
+},{
+
+/* ========== CUSTOM CURSORS ========== */
+
+
+  /* ========== FUN CUSTOM CURSORS ========== */
+
+
+  name: "Cursor: Crosshair",
+  description: "Changes mouse cursor to crosshair",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "crosshair";
+  }
+},
+{
+  name: "Cursor: Pointer",
+  description: "Changes mouse cursor to pointer",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "pointer";
+  }
+},
+{
+  name: "Cursor: Grab",
+  description: "Changes mouse cursor to grab",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "grab";
+  }
+},
+{
+  name: "Cursor: Move",
+  description: "Changes mouse cursor to move",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "move";
+  }
+},
+{
+  name: "Cursor: Wait",
+  description: "Changes mouse cursor to wait",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "wait";
+  }
+},
+{
+  name: "Cursor: Help",
+  description: "Changes mouse cursor to help",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "help";
+  }
+},
+{
+  name: "Cursor: Text",
+  description: "Changes mouse cursor to text (I-beam)",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "text";
+  }
+},
+{
+  name: "Cursor: Progress",
+  description: "Changes mouse cursor to progress",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "progress";
+  }
+},
+{
+  name: "Cursor: Not-allowed",
+  description: "Changes mouse cursor to not-allowed",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "not-allowed";
+  }
+},
+{
+  name: "Cursor: Alias",
+  description: "Changes mouse cursor to alias",
+  run: function () {
+    document.body.style.cursor = document.body.style.cursor ? "" : "alias";
+  }
+},{
+
+
+/* ========== BOLDER TEXT MODS ========== */
+
+
+  name: "Extra Bold Text",
+  description: "Extremely bold text",
+  run: function () {
+    if (document.getElementById("extra-bold-text")) {
+      document.getElementById("extra-bold-text").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "extra-bold-text";
+    style.innerHTML = `* { font-weight: 900 !important; }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Slightly Bigger Text For GUI",
+  description: "Slightly increases text size for readability",
+  run: function () {
+    if (document.getElementById("slightly-bigger-text")) {
+      document.getElementById("slightly-bigger-text").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "slightly-bigger-text";
+    style.innerHTML = `* { font-size: 1.05em !important; }`;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Outline Text",
+  description: "Adds strong outline to text for visibility",
+  run: function () {
+    if (document.getElementById("outline-text")) {
+      document.getElementById("outline-text").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "outline-text";
+    style.innerHTML = `
+      * {
+        text-shadow:
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Shadowed Text",
+  description: "Adds prominent shadow behind text for depth",
+  run: function () {
+    if (document.getElementById("shadow-text")) {
+      document.getElementById("shadow-text").remove();
+      return;
+    }
+    const style = document.createElement("style");
+    style.id = "shadow-text";
+    style.innerHTML = `
+      * {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+},
+
+{
+  name: "Rainbow Text",
+  description: "Text cycles through rainbow colors",
+  run: function () {
+    if (window._rainbowText) {
+      clearInterval(window._rainbowText);
+      window._rainbowText = null;
+      document.querySelectorAll("*").forEach(el => el.style.color = "");
+      return;
+    }
+    let hue = 0;
+    window._rainbowText = setInterval(() => {
+      document.querySelectorAll("*").forEach(el => el.style.color = `hsl(${hue},90%,55%)`);
+      hue += 3; if (hue > 360) hue = 0;
+    }, 100);
+  }
+},{
+
+
+/* ========== RESET ========== */
+
+
+  name: "Reset Visuals",
+  description: "Resets all visual changes",
+  run: function () {
+    document.documentElement.style.filter="";
+    document.documentElement.style.transform="";
+    document.documentElement.style.zoom="";
+    document.body.style.cursor="";
+    clearInterval(window._rainbow);
+    window._rainbow=null;
+    document.querySelectorAll("style[id]").forEach(s=>s.remove());
+    document.removeEventListener("mousemove",window._cursorCircle);
+    document.removeEventListener("mousemove",window._cursorTrailFn);
+    document.removeEventListener("mousemove",window._cursorSparkleFn);
+    document.removeEventListener("mousemove",window._cursorRainbowFn);
+    document.removeEventListener("mousemove",window._cursorGlowFn);
+  }
+},{
+
+
+
+
+
+
+
 
       name: "Toggle Small Font",
       description: "Switch GUI font-size between normal and slightly smaller.",
@@ -5541,6 +6310,7 @@ changelogPage.appendChild(title);
 
 // Versions array (30 versions, highest to lowest)
 const versions = [
+  ["Version 6.60x", "fixed ping display! ADDED CONSOLE MESSAGE AND ADDED PIN GUESSER!!", "null"],
   ["Version 6.50x", "FIXED KEYBINDS!! ADDED CHEATS AND ADDED 8 NEW THEMES, HAPPY HOLIDAYS GUYSS <3", "null"],
   ["Version 6.40x", "UPDATED REFRESH SVG AND ADDED CHEAT", "null"],
   ["Version 6.30x", "ADDED CHEATS AND UPDATED GUI", "null"],
@@ -5727,12 +6497,12 @@ pingDisplay.style.cssText = `
 // Initial text
 pingDisplay.innerText = "Server Ping: Calculating...";
 
-// Append to the bottom of the credits page
+// Assuming `creditsPage` is already defined, append to it
 creditsPage.appendChild(pingDisplay);
 
 // Function to ping a server
 function updatePing() {
-    const serverURL = "https://blooket.com"; // replace with desired server
+    const serverURL = "https://www.blooket.com"; // Correct URL to avoid the 301 redirect
     const start = performance.now();
 
     fetch(serverURL, { method: "HEAD", cache: "no-cache" })
@@ -5750,6 +6520,7 @@ updatePing();
 
 // Update every 5 seconds
 setInterval(updatePing, 5000);
+
 
 
         const settingsPage = document.createElement("div");
@@ -6087,6 +6858,176 @@ setInterval(updatePing, 5000);
     },
 },
 {
+
+    name: "Midnight Bloom",
+    value: {
+        highlight: "#bb2d5b",
+        highlight2: "#682c44",
+        background: "linear-gradient(135deg, #1b1b2f, #2a2a45)",
+        background2: "#3e3e5c",
+        toggleOn: "#bb2d5b",
+        toggleOff: "#682c44",
+        textColor: "#e0e0e0",
+        textColor2: "#bb2d5b",
+    },
+},
+{
+    name: "Silver Horizon",
+    value: {
+        highlight: "#d1d1d1",
+        highlight2: "#b0b0b0",
+        background: "linear-gradient(135deg, #4e4e5d, #2f2f38)",
+        background2: "#3c3c44",
+        toggleOn: "#d1d1d1",
+        toggleOff: "#5a5a60",
+        textColor: "#ffffff",
+        textColor2: "#d1d1d1",
+    },
+},
+{
+    name: "Deep Ocean",
+    value: {
+        highlight: "#006994",
+        highlight2: "#003b57",
+        background: "linear-gradient(180deg, #003b57, #011c2a)",
+        background2: "#002433",
+        toggleOn: "#006994",
+        toggleOff: "#004d6a",
+        textColor: "#cce7ff",
+        textColor2: "#006994",
+    },
+},
+{
+    name: "Rustic Copper",
+    value: {
+        highlight: "#a65c5c",
+        highlight2: "#7b4b4b",
+        background: "linear-gradient(135deg, #e57c73, #7b4b4b)",
+        background2: "#9e6e6e",
+        toggleOn: "#a65c5c",
+        toggleOff: "#5e2f2f",
+        textColor: "#ffffff",
+        textColor2: "#a65c5c",
+    },
+},
+{
+    name: "Frostbite",
+    value: {
+        highlight: "#85c7e0",
+        highlight2: "#6d9db1",
+        background: "linear-gradient(135deg, #2a4d6f, #1f3e50)",
+        background2: "#3e5a70",
+        toggleOn: "#85c7e0",
+        toggleOff: "#3e5a70",
+        textColor: "#ffffff",
+        textColor2: "#85c7e0",
+    },
+},
+{
+    name: "Citrus Mist",
+    value: {
+        highlight: "#f6a500",
+        highlight2: "#f67f1e",
+        background: "linear-gradient(135deg, #f0a500, #ff6600)",
+        background2: "#d05f20",
+        toggleOn: "#f6a500",
+        toggleOff: "#a34317",
+        textColor: "#ffffff",
+        textColor2: "#f6a500",
+    },
+},
+{
+    name: "Mossy Forest",
+    value: {
+        highlight: "#728c5f",
+        highlight2: "#3d6c3d",
+        background: "linear-gradient(180deg, #3d6c3d, #2b4d2b)",
+        background2: "#4f7037",
+        toggleOn: "#728c5f",
+        toggleOff: "#4f7037",
+        textColor: "#ffffff",
+        textColor2: "#728c5f",
+    },
+},
+{
+    name: "Astral Journey",
+    value: {
+        highlight: "#a0a2d0",
+        highlight2: "#6b6c9f",
+        background: "linear-gradient(135deg, #2c3e5c, #1b2a3b)",
+        background2: "#3e4b72",
+        toggleOn: "#a0a2d0",
+        toggleOff: "#4d5176",
+        textColor: "#ffffff",
+        textColor2: "#a0a2d0",
+    },
+},
+{
+    name: "Crimson Ember",
+    value: {
+        highlight: "#ff4c4c",
+        highlight2: "#b73838",
+        background: "linear-gradient(135deg, #ff4c4c, #b73838)",
+        background2: "#8f3030",
+        toggleOn: "#ff4c4c",
+        toggleOff: "#8f3030",
+        textColor: "#ffffff",
+        textColor2: "#ff4c4c",
+    },
+},
+{
+    name: "Obsidian Wave",
+    value: {
+        highlight: "#4e5d6b",
+        highlight2: "#2c3e4f",
+        background: "linear-gradient(135deg, #2c3e4f, #1b2a35)",
+        background2: "#3e4b5a",
+        toggleOn: "#4e5d6b",
+        toggleOff: "#2c3e4f",
+        textColor: "#ffffff",
+        textColor2: "#4e5d6b",
+    },
+},
+{
+    name: "Twilight Ember",
+    value: {
+        highlight: "#ff7f50",
+        highlight2: "#f14d27",
+        background: "linear-gradient(135deg, #ff7f50, #f14d27)",
+        background2: "#d24020",
+        toggleOn: "#ff7f50",
+        toggleOff: "#d24020",
+        textColor: "#ffffff",
+        textColor2: "#ff7f50",
+    },
+},
+{
+    name: "Garnet Eclipse",
+    value: {
+        highlight: "#9b2d20",
+        highlight2: "#6b1f14",
+        background: "linear-gradient(135deg, #9b2d20, #6b1f14)",
+        background2: "#6f2923",
+        toggleOn: "#9b2d20",
+        toggleOff: "#6f2923",
+        textColor: "#ffffff",
+        textColor2: "#9b2d20",
+    },
+},
+{
+    name: "Sapphire Twilight",
+    value: {
+        highlight: "#0f4b73",
+        highlight2: "#006282",
+        background: "linear-gradient(135deg, #0f4b73, #006282)",
+        background2: "#003e5d",
+        toggleOn: "#0f4b73",
+        toggleOff: "#003e5d",
+        textColor: "#ffffff",
+        textColor2: "#0f4b73",
+    },
+},
+                    {
     name: "Betastar",
     value: {
         highlight: "#282828",
@@ -6113,7 +7054,7 @@ setInterval(updatePing, 5000);
     },
 },
 
-                    {                     name: "X-GUI ORIGINAL",
+                    { name: "X-GUI ORIGINAL",
                         value: {
                             highlight: variables["--highlight"],
                             highlight2: variables["--highlight2"],
