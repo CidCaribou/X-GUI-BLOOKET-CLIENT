@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         X-GUI CLIENT FOR BLOOKET
 // @namespace    http://tampermonkey.net/
-// @version      6.70x
+// @version      6.61x
 // @description  NOT PATCHED ANYMORE, THE BEST GUI ON THE WEB! ADVANCED ANTIBAN AND TONS OF FEATURES {CHEAT} {HACK} {CLIENT}
 // @author       XullysFN
 // @run-at       document-end
@@ -64,7 +64,7 @@ console.log("%c Star the GitHub repo! %c https://github.com/xgui-client/X-GUI-BL
     const timeProcessed = 1747005941679;
     let latestProcess = -1;
     const cheat = (async () => {
-        const versionName = "6.70x";
+        const versionName = "6.61x";
         const gui = document.createElement("div");
         Object.assign(gui.style, {
             top: window.innerHeight / 2 - 250 + "px",
@@ -6401,7 +6401,7 @@ changelogPage.appendChild(title);
 
 // Versions array (30 versions, highest to lowest)
 const versions = [
-  ["Version 6.70x", "ADDED NEW FEATURE: ALT MANAGER ADD ADDED BLOOKET STREAM FINDER", "null"],
+  ["Version 6.61x", "ADDED NEW FEATURE: ALT MANAGER ADD ADDED BLOOKET STREAM FINDER", "null"],
   ["Version 6.60x", "fixed ping display! ADDED CONSOLE MESSAGE AND ADDED PIN GUESSER!!", "null"],
   ["Version 6.50x", "FIXED KEYBINDS!! ADDED CHEATS AND ADDED 8 NEW THEMES, HAPPY HOLIDAYS GUYSS <3", "null"],
   ["Version 6.40x", "UPDATED REFRESH SVG AND ADDED CHEAT", "null"],
