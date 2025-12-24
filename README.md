@@ -1,6 +1,6 @@
 # 🚀 X-GUI Blooket Client
 # DOWNLOAD CSP UNBLOCK [**HERE**](https://chromewebstore.google.com/detail/csp-unblock/lkbelpgpclajeekijigjffllhigbhobd?hl=en) FOR A BETTER EXPERIENCE
-# ADDED 20+ NEW EXTRAS IN 6.60x!!!
+# NEW ALT MANAGER FEATURE ADDED!
 
 [![Website](https://img.shields.io/badge/Website-X--GUI-1f6feb?style=for-the-badge&logo=google-chrome&logoColor=white)](https://xgui-client.github.io)
 [![GitHub stars](https://img.shields.io/github/stars/xull-xxx/X-GUI-BLOOKET-CLIENT?style=for-the-badge&logo=github)](https://github.com/xull-xxx/X-GUI-BLOOKET-CLIENT/stargazers)
