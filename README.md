@@ -49,10 +49,10 @@
 
 ## 📜 Credits
 - **GUI Created By:** 05Konz 
-- **Maintained & Updated By:** Xullys
+- **Maintained & Updated By:** Xullys, Lil Skittle And CatHead
 - **Huge Credit To** CryptoDude3 **and** Duck Club Blooket Hacks!
 
-- **JOIN THEIR DISCORD** [HERE](https://discord.com/channels/1238253338995195995/1379132344606396508)
+- **JOIN THEIR DISCORD** [HERE](https://discord.gg/FcYy4uHUws)
 
 ---
 
