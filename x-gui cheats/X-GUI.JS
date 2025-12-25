@@ -2241,70 +2241,7 @@ extras: {
   name: "Extras",
   cheats: [
     {
-       name: "Remove CSP and Bypass CORS",
-            description: "Removes Content Security Policy and bypasses Cross-Origin Resource Sharing restrictions on the page.",
-            type: "toggle",
-            run: function() {
-                // --- REMOVE CSP ---
-                function REMOVE_CSP() {
-                    // Remove all CSP-related meta tags
-                    const metaTags = document.getElementsByTagName("meta");
-                    for (let i = metaTags.length - 1; i >= 0; i--) {
-                        if (metaTags[i].getAttribute("http-equiv") === "Content-Security-Policy" ||
-                            metaTags[i].getAttribute("http-equiv") === "X-Content-Security-Policy" ||
-                            metaTags[i].getAttribute("http-equiv") === "X-WebKit-CSP") {
-                            metaTags[i].parentNode.removeChild(metaTags[i]);
-                        }
-                    }
-
-                    // Disable CSP headers via XMLHttpRequest
-                    if (window.XMLHttpRequest) {
-                        const originalOpen = XMLHttpRequest.prototype.open;
-                        XMLHttpRequest.prototype.open = function(method, url) {
-                            this.setRequestHeader("Content-Security-Policy", ""); // Remove any CSP headers
-                            this.setRequestHeader("X-Content-Security-Policy", ""); // Remove X-Content-Security headers
-                            return originalOpen.apply(this, arguments);
-                        };
-                    }
-                }
-
-                // --- BYPASS CORS ---
-                function BYPASS_CORS() {
-                    // Modify XMLHttpRequest to allow cross-origin requests
-                    if (window.XMLHttpRequest) {
-                        const originalOpen = XMLHttpRequest.prototype.open;
-                        XMLHttpRequest.prototype.open = function(method, url) {
-                            this.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
-                            this.setRequestHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow common methods
-                            this.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With"); // Allow necessary headers
-                            return originalOpen.apply(this, arguments);
-                        };
-
-                        // Modify Fetch API to include CORS headers
-                        const originalFetch = window.fetch;
-                        window.fetch = function(url, options = {}) {
-                            options.headers = options.headers || {};
-                            options.headers["Access-Control-Allow-Origin"] = "*"; // Allow all origins
-                            options.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"; // Allow common methods
-                            options.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"; // Allow necessary headers
-                            return originalFetch(url, options);
-                        };
-                    }
-                }
-
-                // --- Disable Web Security (LocalStorage/SessionStorage) ---
-                function DISABLE_WEB_SECURITY() {
-                    // Override localStorage and sessionStorage security restrictions
-                    Object.defineProperty(window, "localStorage", { get: function() { return window.localStorage; }, configurable: true });
-                    Object.defineProperty(window, "sessionStorage", { get: function() { return window.sessionStorage; }, configurable: true });
-                }
-
-                // Run the functions
-                REMOVE_CSP();
-                BYPASS_CORS();
-                DISABLE_WEB_SECURITY();
-            }
-        },{
+       
 
 
         name: "Toggle Invert Colors",
