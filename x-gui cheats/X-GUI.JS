@@ -6677,7 +6677,7 @@ Object.assign(title.style, {
 changelogPage.appendChild(title);
 
 // Versions array (30 versions, highest to lowest)
-const versions = 
+const versions = [
   ["Version 6.62x", "ADDED ACCOUNT GENERATOR", "null"],
   ["Version 6.61x", "ADDED BLOOKET STREAM FINDER AND ALT MANAGER", "null"],
   ["Version 6.60x", "fixed ping display! ADDED CONSOLE MESSAGE AND ADDED PIN GUESSER!!", "null"],
