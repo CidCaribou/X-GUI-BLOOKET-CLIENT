@@ -6538,7 +6538,43 @@ mobilePage.className = classes.mobilePage;
         enterBtn.className = "xgui-mobile-toggle-btn";
         enterBtn.onclick = () => enableMobile(true);
         mobilePage.appendChild(enterBtn);
+
     }
+    // ======= RESET PERSISTENCE BUTTON =======
+(function () {
+    const resetBtn = document.createElement("div");
+    resetBtn.innerText = "Reset GUI Position";
+    resetBtn.className = "xgui-mobile-toggle-btn"; // same styling as other mobile buttons
+    resetBtn.style.background = "#f39c12"; // optional: different color to distinguish
+    resetBtn.style.marginTop = "8px";
+
+    resetBtn.onclick = () => {
+        // Clear the persistence cookie
+        document.cookie = PERSIST_KEY + "=; path=/; domain=.blooket.com; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+        // Reset GUI to default size and position
+        gui.style.width = "800px";
+        gui.style.height = "500px";
+        gui.style.left = "100px"; // default left, change if needed
+        gui.style.top = "100px";  // default top, change if needed
+
+        // Restore all children visibility
+        for (const child of gui.children) {
+            if (child === controls) continue;
+            child.style.display = child._display || "";
+        }
+
+        // Reset minimize state
+        if (minimizeControl.minimized) {
+            minimizeControl.onclick(); // trigger full view
+        }
+
+        alert("GUI position has been reset!");
+    };
+
+    mobilePage.appendChild(resetBtn);
+})();
+
 
     // ====================== AUTO LOAD / AUTOMOBILE ======================
     const storedValue = localStorage.getItem(MOBILE_KEY);
