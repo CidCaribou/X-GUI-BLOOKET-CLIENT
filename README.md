@@ -1,5 +1,7 @@
 # 🚀 X-GUI Blooket Client
-# IF YOU ARE ON MOBILE, PLEASE ZOOM OUT TO 50%!
+# EXTENSION MADE BY @LANDSEDGE ON DISCORD HAS BEEN ADDED!
+# BYPASSES CSP AND CORS
+# YOU CAN FIND INSTALL INSTRUCTIONS IN THE HELP SECTION
 # FIXED MOST CHEATS!
 
 [![Website](https://img.shields.io/badge/Website-X--GUI-1f6feb?style=for-the-badge&logo=google-chrome&logoColor=white)](https://xgui-client.github.io)
@@ -14,6 +16,18 @@
 ---
 
 ## ⚙️ Setup & Usage
+
+
+<details>
+<summary>✔ Option 0: Extension</summary>
+
+
+1. Download the file form the EXTENSION folder
+2. Unzip the file
+3. Go to your browser extension manager
+4. Enable developer mode
+5. Click "Load Unpacked" and select the unzipped file
+</details>
 
 <details>
 <summary>📜 Option 1: Userscript</summary>
