@@ -1,5 +1,5 @@
 # 🚀 X-GUI Blooket Client
-# EXTENSION MADE BY LANDSEDGE!
+# SWAL ADDED, MADE BY LANDSEDGE!
 # CLIENT SIDED BLOOK CHANGER
 # REDHORSE26 FIXED MOST CHEATS!
 
@@ -63,7 +63,7 @@
 
 ## 📜 Credits
 - **GUI Created By:** 05Konz 
-- **Maintained & Updated By:** Xullys, Lil Skittle, CatHead and redhorse26
+- **Maintained & Updated By:** Xullys, Lil Skittle, CatHead, landsedge and redhorse26
 - **Huge Credit To** CryptoDude3 **and** Duck Club Blooket Hacks!
 
 - **JOIN THEIR DISCORD** [HERE](https://discord.gg/FcYy4uHUws)
