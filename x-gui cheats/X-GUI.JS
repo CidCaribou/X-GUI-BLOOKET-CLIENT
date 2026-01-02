@@ -7137,132 +7137,7 @@ button,
                 name: "Café",
                 cheats: [{
                         name: "Max Items",
-                        description: "Maxes out items in the shop (Only usable in the shop)",
-                        run: function() {
-                            if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                            else {
-                                const stateNode = getStateNode();
-                                stateNode.setState({
-                                    items: Object.keys(stateNode.state.items).reduce((obj, item) => ((obj[item] = 5), obj), {})
-                                });
-                            }
-                        },
-                    },
-                    {
-                        name: "Remove Customers",
-                        description: "Skips the current customers (Not usable in the shop)",
-                        run: function() {
-                            const stateNode = getStateNode();
-                            stateNode.state.customers.forEach((customer, i) => window.setTimeout(() => customer.blook && stateNode.removeCustomer(i, true), i * 250));
-                        },
-                    },
-                    {
-                        name: "Reset Abilities",
-                        description: "Resets used abilities in shop (Only usable in the shop)",
-                        run: function() {
-                            if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                            else {
-                                const stateNode = getStateNode();
-                                stateNode.setState({
-                                    abilities: Object.keys(stateNode.state.abilities).reduce((obj, item) => ((obj[item] = 5), obj), {})
-                                });
-                            }
-                        },
-                    },
-                    {
-                        name: "Set Cash",
-                        description: "Sets cafe cash",
-                        inputs: [{
-                            name: "Amount",
-                            type: "number",
-                        }, ],
-                        run: function(cafeCash) {
-                            let stateNode = getStateNode();
-                            stateNode.setState({
-                                cafeCash
-                            });
-                            stateNode.props.liveGameController.setVal({
-                                path: `c/${stateNode.props.client.name}/ca`,
-                                val: cafeCash,
-                            });
-                        },
-                    },
-                    {
-
-                        name: "Tax Player",
-                        description: "Makes a player pay tax",
-                        inputs: [{
-                            name: "Player's Name",
-                            type: "text"
-                        }],
-                        run: function(playerName) {
-                            function reactHandler() {
-                                return Object.values(document.querySelector('#app>div>div'))[1].children[0]._owner;
-                            }
-
-                            function setv(args) {
-                                reactHandler().stateNode.props.liveGameController.setVal({
-                                    path: "c/" + reactHandler().stateNode.props.client.name + "/" + args[0],
-                                    val: args.slice(1, args.length).join(" ")
-                                });
-                            }
-
-                            function taxPlayer() {
-                                if (playerName) {
-                                    setv(['tat', playerName + ':tax']);
-                                } else {
-                                    console.log("No player name entered. Operation cancelled.");
-                                }
-                            }
-
-                            taxPlayer();
-                        }
-                    }, {
-
-                        name: "Attack Player",
-                        description: "Sends the player a health inspection",
-                        inputs: [{
-                            name: "Player's Name",
-                            type: "text"
-                        }],
-                        run: (function(targetPlayer) {
-                            function reactHandler() {
-                                return Object.values(document.querySelector('body div[class*="_body"]'))[1].children[0]._owner;
-                            }
-
-                            reactHandler().stateNode.props.liveGameController.setVal({
-                                id: reactHandler().stateNode.props.client.hostId,
-                                path: "c/" + reactHandler().stateNode.props.client.name + "/tat",
-                                val: targetPlayer + ":inspect"
-                            });
-                        })
-                    }, {
-
-
-                        name: "Stock Food",
-                        description: "Stocks all food to 99 (Not usable in the shop)",
-                        run: function() {
-                            if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
-                            else {
-                                const stateNode = getStateNode();
-                                stateNode.setState({
-                                    foods: stateNode.state.foods.map((e) => ({
-                                        ...e,
-                                        stock: 99,
-                                        level: 5
-                                    }))
-                                });
-                            }
-                        },
-                    },
-                ],
-            },
-            solocafe: {
-                img: "https://media.blooket.com/image/upload/v1663212881/Media/logos/Cafe_Logo_Resized.png",
-                name: "Café (Solo)",
-                cheats: [{
-                        name: "Max Items",
-                        description: "Maxes out items in the shop",
+                        description: "Maxes out items in the shop (solo only)",
                         run: function() {
                             (() => {
 
@@ -7339,7 +7214,7 @@ button,
                     },
                     {
                         name: "Set Cash",
-                        description: "Sets cafe cash",
+                        description: "Sets cafe cash (only works in solo)",
                         inputs: [{
                             name: "Amount",
                             type: "number",
@@ -7470,7 +7345,7 @@ button,
                     },
                     {
                         name: "Stock Food",
-                        description: "Stocks all food to 99 (Not usable in the shop)",
+                        description: "Stocks all food to 99 (Not usable in the shop) (Solo only)",
                         run: function() {
                             (() => {
                                 const root = document.querySelector('#app') || document.body;
@@ -7535,7 +7410,7 @@ button,
                         },
                     }, {
                         name: "Make Customers OP",
-                        description: "Makes all customers pay a LOT",
+                        description: "Makes all customers pay a LOT (only works in solo)",
                         run: function() {
                             (() => {
 
@@ -7595,6 +7470,71 @@ button,
                             })();
 
 
+                        }
+                    }, {
+                        name: "Make Upgrades Cheap",
+                        description: "Makes most upggrades cheap",
+                        run: function() {
+
+                            (() => {
+                                console.clear();
+                                console.log("%c💸 SETTING COST: 1 | PROFIT: 9e99", "color: #ff00ff; font-weight: bold;");
+
+                                const root = document.querySelector('#app') || document.body;
+                                const rKey = Object.keys(root).find(k => k.startsWith('__reactFiber'));
+                                if (!rKey) return console.log("❌ React Root not found");
+
+                                let success = false;
+
+                                function traverse(node) {
+                                    if (success || !node) return;
+
+                                    if (node.memoizedState) {
+                                        let hook = node.memoizedState;
+                                        let index = 0;
+                                        
+                                        while(hook) {
+                                            if (index === 1) {
+                                                const val = hook.memoizedState;
+                                                
+                                                if (val && typeof val === 'object' && val.toast && val.toast.prices) {
+                                                    const newDefs = { ...val };
+                                                    const items = Object.keys(newDefs);
+
+                                                    items.forEach(key => {
+                                                        const item = newDefs[key];
+                                                        if (item && item.prices && item.profits) {
+                                                            const cheapPrices = new Array(item.prices.length).fill(1);
+                                                            const insaneProfits = new Array(item.profits.length).fill(9e99);
+                                                            insaneProfits[0] = 0; // Keep lvl 0 safe
+                                                            
+                                                            newDefs[key] = {
+                                                                ...item,
+                                                                prices: cheapPrices,
+                                                                profits: insaneProfits
+                                                            };
+                                                        }
+                                                    });
+
+                                                    if (hook.queue && hook.queue.dispatch) {
+                                                        hook.queue.dispatch(newDefs);
+                                                        success = true;
+                                                        console.log("%c✅ DONE. Try upgrading now.", "color: #00ff00; font-weight: bold;");
+                                                    }
+                                                }
+                                            }
+                                            hook = hook.next;
+                                            index++;
+                                        }
+                                    }
+                                    traverse(node.child);
+                                    traverse(node.sibling);
+                                }
+
+                                traverse(root[rKey]);
+                                
+                                if (!success) console.log("❌ Failed to find definitions hook.");
+                            })();
                         }
                     }
                 ],
