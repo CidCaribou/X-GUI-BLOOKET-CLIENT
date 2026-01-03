@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         X-GUI CLIENT FOR BLOOKET
 // @namespace    http://tampermonkey.net/
-// @version      6.66x
+// @version      6.67x
 // @description  NOT PATCHED ANYMORE, THE BEST GUI ON THE WEB! ADVANCED ANTIBAN AND TONS OF FEATURES {CHEAT} {HACK} {CLIENT}
 // @author       XullysFN
 // @run-at       document-end
