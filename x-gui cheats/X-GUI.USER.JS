@@ -2704,6 +2704,40 @@ button,
                 name: "Extras",
                 cheats: [{
 
+                       name: "EXECUTOR",
+                       description: "Opens an advanced, sleek, GUI with countless features, made by @landsedge",
+                       run: function() {
+
+    try {
+        if (typeof window.ExecutorUserScriptVersion === "function") {
+            console.log("Executor Userscript detected — running the built-in version.");
+            ExecutorUserScriptVersion();
+        } else {
+            new Function("var testCSP='CSP check'")();
+
+            var s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js';
+            s.onload = function(){ s.remove(); };
+            s.onerror = function(){
+                alert('Error loading the script.\n\nTry:\n1. Visiting a different site (some block scripts)\n2. Reinstall the bookmarklet\n3. Contact the owner.');
+                console.error('Script load error via <script src>');
+            };
+            document.body.appendChild(s);
+        }
+    } catch(e) {
+        if (e.message.includes('Content Security Policy')) {
+            var i = document.querySelector('iframe');
+            var m = 'Script blocked by Content Security Policy.\n\nTry:\n1. Visit a different site\n2. Use the Spoofer\n3. Contact the owner.';
+            i ? i.contentWindow.alert(m) : alert(m);
+        } else {
+            alert('Script execution failed.\n\nTry:\n1. Visit a different site\n2. Reinstall the bookmarklet\n3. Contact the owner.');
+            console.error('Execution error:', e);
+        }
+    }
+                        },
+                    },
+                    {
+
 
                         name: "Toggle Invert Colors",
                         description: "Toggle between inverting and restoring colors on the page",
