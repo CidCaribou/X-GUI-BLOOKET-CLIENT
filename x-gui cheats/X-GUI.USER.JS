@@ -1851,7 +1851,7 @@ button,
                     },
                     {
 name: "Free Plus!",
-                            description: "Gives you plus perks like folders, does not unlock plus gamemodes!",
+description: "Gives you plus perks like folders, does not unlock plus gamemodes! ONLY WORKS ON ~My Sets~ PAGE!",
                             run: function () {
 
     const reactHandler = () => Object.values(document.querySelector('#app>div>div'))[1].children[0]._owner.stateNode;
