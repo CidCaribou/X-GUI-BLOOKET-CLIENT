@@ -21,6 +21,9 @@
 
 
 
+
+
+
 /*!
 * sweetalert2 v11.26.17
 * Released under the MIT License.
@@ -1844,6 +1847,36 @@ button,
                                 ind++;
                                 document.querySelector("[class*='answersHolder'] :nth-child(" + ind + ") > div").style.backgroundColor = found ? "rgb(0, 207, 119)" : "rgb(189, 15, 38)";
                             }
+                        },
+                    },
+                    {
+name: "Free Plus!",
+                            description: "Gives you plus perks like folders, does not unlock plus gamemodes!",
+                            run: function () {
+
+    const reactHandler = () => Object.values(document.querySelector('#app>div>div'))[1].children[0]._owner.stateNode;
+    const component = reactHandler();
+
+    if (!component) return console.error("React component not found!");
+
+    component.getIsPlus = e => e();
+    component.plus = true;
+
+    if (component.props && component.props.user && component.props.user.data) {
+        component.props.user.data.plan = "Plus";
+        component.props.user.data.hasPlus = true;
+        component.props.user.data.planName = "Plus";
+    }
+
+    component.setState({
+        hasPlus: true,
+        noFolder: false,
+        noMerge: false,
+        copying: false
+    });
+
+    console.log("Plus unlocked!");
+
                         },
                     },
                     {
